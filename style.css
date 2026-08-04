@@ -667,61 +667,6 @@ p{ margin:0; }
 }
 
 /* ============================================================
-   PHOTO BOOTH — FILM STRIP
-   ============================================================ */
-.filmstrip-wrap{
-  max-width: 100%;
-  overflow: hidden;
-}
-.filmstrip{
-  display:flex;
-  gap: 1.2rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding: 1rem clamp(1rem, 8vw, 12vw) 1.4rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.filmstrip::-webkit-scrollbar{ display:none; }
-.frame{
-  position:relative;
-  flex: 0 0 auto;
-  width: clamp(200px, 26vw, 300px);
-  aspect-ratio: 3/4;
-  scroll-snap-align: center;
-  background: var(--burgundy-dark);
-  padding: 10px 10px 26px;
-  box-shadow: 0 20px 40px rgba(90,30,45,0.25);
-  transition: transform .4s var(--ease-soft);
-}
-.frame::before, .frame::after{
-  content:"";
-  position:absolute;
-  left:0; right:0;
-  height: 8px;
-  background-image: repeating-linear-gradient(to right, var(--champagne) 0 8px, transparent 8px 16px);
-  opacity:.4;
-}
-.frame::before{ top:0; }
-.frame::after{ bottom: 12px; }
-.frame img{
-  width:100%; height:100%;
-  object-fit:cover;
-}
-.frame:hover{ transform: translateY(-8px) scale(1.02); }
-
-.swipe-hint{
-  text-align:center;
-  margin-top: 1rem;
-  font-family: var(--font-body);
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--gold);
-  opacity:.8;
-}
-@media (min-width: 861px){ .swipe-hint{ display:none; } }
-
-/* ============================================================
    LIGHTBOX
    ============================================================ */
 .lightbox{
@@ -760,115 +705,87 @@ p{ margin:0; }
 .lightbox-close:hover{ background: rgba(201,166,107,0.15); }
 
 /* ============================================================
-   WEDDING WEEKEND CARDS
+   THE CELEBRATIONS — DAY SCHEDULE
    ============================================================ */
-.event-cards{
+.weekend-days{
   max-width: var(--container);
   margin: 0 auto;
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.2rem, 3vw, 2rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.4rem, 3vw, 2.4rem);
 }
-.event-card{
+.day-card{
   background: var(--white);
   border: 1px solid rgba(90,30,45,0.1);
-  padding: clamp(2rem, 4vw, 2.8rem) clamp(1.4rem, 3vw, 2rem);
-  text-align:left;
-  position:relative;
+  box-shadow: 0 14px 36px rgba(90,30,45,0.08);
   overflow:hidden;
-  transition: transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft);
-  box-shadow: 0 10px 30px rgba(90,30,45,0.06);
 }
-.event-card::before{
+.day-card-head{
+  background: var(--burgundy);
+  color: var(--champagne);
+  padding: clamp(1.4rem, 3vw, 1.9rem) clamp(1.6rem, 3vw, 2.2rem);
+  position:relative;
+}
+.day-card-head::after{
   content:"";
   position:absolute;
-  left:0; top:0; bottom:0;
-  width:3px;
+  left: clamp(1.6rem, 3vw, 2.2rem);
+  bottom: 0;
+  width: 40px;
+  height: 2px;
   background: var(--gold);
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform .5s var(--ease-soft);
 }
-.event-card:hover{
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(90,30,45,0.16);
-}
-.event-card:hover::before{ transform: scaleY(1); }
-.event-card-top{
-  display:flex;
-  align-items:center;
-  gap: .8rem;
-  margin-bottom: 1rem;
-  color: var(--gold);
-}
-.event-card-top svg{ width:26px; height:26px; }
-.event-card-top h3{ font-size: 1.5rem; color: var(--burgundy); }
-.event-date{
+.day-label{
+  display:block;
   font-family: var(--font-body);
   font-style: italic;
-  color: rgba(90,30,45,0.7);
-  margin-bottom: 1.2rem;
-}
-.event-more{
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--burgundy);
-  border-bottom: 1px solid var(--gold);
-  padding-bottom: 2px;
+  font-size: 0.75rem;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
 }
-
-@media (max-width: 760px){
-  .event-cards{ grid-template-columns: 1fr; }
+.day-card-head h3{
+  color: var(--champagne);
+  font-size: clamp(1.3rem, 2.6vw, 1.7rem);
 }
-
-.event-detail{
-  position: fixed;
-  inset:0;
-  z-index: 2200;
-  background: rgba(20,8,12,0.7);
-  backdrop-filter: blur(4px);
+.day-schedule{
+  list-style:none;
+  margin:0;
+  padding: 0.6rem clamp(1.6rem, 3vw, 2.2rem) 1.8rem;
+}
+.day-schedule li{
   display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 1.6rem;
-  opacity:0;
-  visibility:hidden;
-  transition: opacity .4s var(--ease-lux), visibility .4s;
+  flex-direction:column;
+  gap: 0.3rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(90,30,45,0.08);
 }
-.event-detail.open{ opacity:1; visibility:visible; }
-.event-detail-inner{
-  position:relative;
-  background: var(--champagne);
-  max-width: 480px;
-  width:100%;
-  padding: clamp(2.2rem, 6vw, 3rem);
-  border: 1px solid var(--gold);
-  text-align:center;
-  transform: translateY(20px) scale(.97);
-  transition: transform .45s var(--ease-lux);
-}
-.event-detail.open .event-detail-inner{ transform: translateY(0) scale(1); }
-.event-detail-inner h3{ font-size: 1.6rem; margin: .6rem 0 1rem; }
-.event-detail-inner p{ line-height:1.6; color: rgba(90,30,45,0.85); font-size: 1.05rem; }
-.event-when{
-  margin-top: 1.4rem !important;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: .5rem;
+.day-schedule li:last-child{ border-bottom:none; }
+.schedule-time{
+  font-family: var(--font-body);
   font-style: italic;
-  color: var(--burgundy) !important;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  color: var(--gold);
+  text-transform: uppercase;
 }
-.event-when svg{ width:16px; height:16px; color: var(--gold); }
-.event-detail-inner [data-detail]{ display:none; }
-.event-detail-inner [data-detail].active{ display:block; }
-.event-detail-close{
-  position:absolute;
-  top: 1rem; right: 1rem;
-  width: 36px; height:36px;
+.schedule-event{
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
   color: var(--burgundy);
-  display:flex; align-items:center; justify-content:center;
+  display:flex;
+  flex-direction:column;
+  gap: 0.2rem;
+}
+.schedule-event em{
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(90,30,45,0.7);
+}
+@media (max-width: 760px){
+  .weekend-days{ grid-template-columns: 1fr; }
 }
 
 /* ============================================================
