@@ -1,7 +1,6 @@
 /* ============================================================
    AVNEEL & RACHIT — WEDDING INVITATION
    ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) lucide.createIcons();
 
@@ -23,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .frame, .masonry-item, input, textarea')) {
+    if (e.target.closest('a, button, .masonry-item, input, textarea')) {
       cursorRing.classList.add('hovering');
     }
   });
   document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, .frame, .masonry-item, input, textarea')) {
+    if (e.target.closest('a, button, .masonry-item, input, textarea')) {
       cursorRing.classList.remove('hovering');
     }
   });
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Loader → Envelope screen ---------- */
   const loader = document.getElementById('loader');
   const envelopeScreen = document.getElementById('envelope-screen');
-
   setTimeout(() => {
     loader.classList.add('hide');
     envelopeScreen.classList.add('show');
@@ -99,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-
       if (window.ScrollTrigger) {
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => { lenis.raf(time * 1000); });
@@ -120,22 +117,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (opened) return;
     opened = true;
     envelope.classList.add('cracking');
-
+    attemptPlayMusic();
+    muteBtn.classList.add('visible');
     setTimeout(() => {
       envelope.classList.add('opened');
     }, 380);
-
     setTimeout(() => {
       envelopeScreen.classList.add('opened');
       site.classList.add('reveal');
       document.body.style.cursor = '';
       initLenis();
       initScrollAnimations();
-      muteBtn.classList.add('visible');
-      attemptPlayMusic();
     }, 1500);
   }
-
   waxSeal.addEventListener('click', openInvitation);
   waxSeal.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInvitation(); }
@@ -197,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .fromTo('.hero-meta', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: .8 }, '-=.3');
 
     // timeline items
-    gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+    gsap.utils.toArray('.timeline-item').forEach((item) => {
       const media = item.querySelector('.timeline-media');
       const text = item.querySelector('.timeline-text');
       const fromX = item.dataset.side === 'left' ? -40 : 40;
@@ -226,14 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // filmstrip frames
-    gsap.utils.toArray('.frame').forEach((f) => {
-      gsap.fromTo(f, { opacity: 0, y: 30 }, {
-        opacity: 1, y: 0, duration: .8, ease: 'power2.out',
-        scrollTrigger: { trigger: f, start: 'top 90%' }
-      });
-    });
-
     // masonry
     gsap.utils.toArray('.masonry-item').forEach((f, i) => {
       gsap.fromTo(f, { opacity: 0, y: 40 }, {
@@ -242,13 +228,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // event cards stagger
-    gsap.fromTo('.event-card', { opacity: 0, y: 40 }, {
+    // day cards stagger
+    gsap.fromTo('.day-card', { opacity: 0, y: 40 }, {
       opacity: 1, y: 0, duration: .8, stagger: .15, ease: 'power2.out',
-      scrollTrigger: { trigger: '.event-cards', start: 'top 85%' }
+      scrollTrigger: { trigger: '.weekend-days', start: 'top 85%' }
+    });
+    gsap.utils.toArray('.day-schedule li').forEach((li, i) => {
+      gsap.fromTo(li, { opacity: 0, x: -14 }, {
+        opacity: 1, x: 0, duration: .6, ease: 'power2.out', delay: (i % 4) * 0.06,
+        scrollTrigger: { trigger: li, start: 'top 92%' }
+      });
     });
 
-    // section head underline reveal via scale (subtle)
+    // section head reveal
     gsap.utils.toArray('.section-head h2').forEach(h => {
       gsap.fromTo(h, { opacity: 0, y: 24 }, {
         opacity: 1, y: 0, duration: 1, ease: 'power3.out',
@@ -263,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lenis) lenis.scrollTo(target); else target.scrollIntoView({ behavior: 'smooth' });
   });
 
-  /* ---------- Lightbox (filmstrip + masonry) ---------- */
+  /* ---------- Lightbox (masonry gallery) ---------- */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
@@ -278,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.classList.remove('open');
     lightbox.setAttribute('aria-hidden', 'true');
   }
-  document.querySelectorAll('.frame, .masonry-item').forEach(el => {
+  document.querySelectorAll('.masonry-item').forEach(el => {
     el.addEventListener('click', () => {
       const img = el.querySelector('img');
       openLightbox(el.dataset.full || img.src, img.alt);
@@ -288,30 +280,14 @@ document.addEventListener('DOMContentLoaded', () => {
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-  /* ---------- Wedding weekend expandable cards ---------- */
-  const eventDetail = document.getElementById('event-detail');
-  const eventDetailClose = document.getElementById('event-detail-close');
-  document.querySelectorAll('.event-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const key = card.dataset.event;
-      eventDetail.querySelectorAll('[data-detail]').forEach(d => {
-        d.classList.toggle('active', d.dataset.detail === key);
-      });
-      eventDetail.classList.add('open');
-    });
-  });
-  eventDetailClose.addEventListener('click', () => eventDetail.classList.remove('open'));
-  eventDetail.addEventListener('click', (e) => { if (e.target === eventDetail) eventDetail.classList.remove('open'); });
-
   /* ---------- Countdown ---------- */
-  const weddingDate = new Date('2026-12-03T10:00:00');
+  const weddingDate = new Date('2026-12-03T11:00:00');
   const cdDays = document.getElementById('cd-days');
   const cdHours = document.getElementById('cd-hours');
   const cdMins = document.getElementById('cd-mins');
   const cdSecs = document.getElementById('cd-secs');
 
   function pad(n){ return String(n).padStart(2, '0'); }
-
   function updateCountdown(){
     const now = new Date();
     let diff = weddingDate - now;
@@ -330,9 +306,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Add to calendar ---------- */
   document.getElementById('add-calendar-btn').addEventListener('click', () => {
-    const start = '20261203T100000';
-    const end = '20261204T230000';
-    const details = encodeURIComponent("Avneel & Rachit's Wedding Weekend");
+    const start = '20261203T110000';
+    const end = '20261205T010000';
+    const details = encodeURIComponent("Avneel & Rachit's Wedding Celebrations");
     const location = encodeURIComponent('Glory by Shrida');
     const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${details}&dates=${start}/${end}&location=${location}&details=${encodeURIComponent('Join us as we begin forever.')}`;
     window.open(url, '_blank');
@@ -356,13 +332,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- RSVP form ---------- */
   const rsvpForm = document.getElementById('rsvp-form');
   const rsvpSuccess = document.getElementById('rsvp-success');
-
   rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = rsvpForm.querySelector('.rsvp-submit');
     submitBtn.style.opacity = '0.6';
     submitBtn.disabled = true;
-
     try {
       const formData = new FormData(rsvpForm);
       const action = rsvpForm.getAttribute('action');
@@ -376,7 +350,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       /* proceed to success state regardless — guest experience first */
     }
-
     rsvpForm.style.display = 'none';
     rsvpSuccess.classList.add('show');
     rsvpSuccess.setAttribute('aria-hidden', 'false');
@@ -391,7 +364,6 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = window.innerHeight;
     document.body.appendChild(canvas);
     const cctx = canvas.getContext('2d');
-
     const colors = ['#C9A66B', '#5A1E2D', '#F8F2EA', '#E3C793'];
     const pieces = Array.from({ length: 140 }, () => ({
       x: Math.random() * canvas.width,
@@ -404,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rotSpeed: Math.random() * 8 - 4,
       drift: Math.random() * 2 - 1
     }));
-
     let frame = 0;
     function draw(){
       frame++;
@@ -417,7 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
         cctx.translate(p.x, p.y);
         cctx.rotate(p.rot * Math.PI / 180);
         cctx.fillStyle = p.color;
-        cctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        cctx.fillRect(-p.w / 2, -p.h / 2, w(p), h(p));
+        function w(p){ return p.w; }
+        function h(p){ return p.h; }
         cctx.restore();
       });
       if (frame < 220) {
@@ -433,55 +406,4 @@ document.addEventListener('DOMContentLoaded', () => {
   function spawnPetal(){
     const petal = document.createElement('div');
     petal.className = 'petal';
-    petal.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0C10 4 16 6 8 16C0 6 6 4 8 0Z" fill="${Math.random() > 0.5 ? '#C9A66B' : '#5A1E2D'}" opacity="0.55"/></svg>`;
-    petal.style.left = Math.random() * 100 + 'vw';
-    document.body.appendChild(petal);
-
-    const duration = Math.random() * 6 + 8;
-    const drift = Math.random() * 120 - 60;
-    petal.animate([
-      { transform: 'translate(0,0) rotate(0deg)', opacity: 0 },
-      { transform: `translate(${drift * 0.3}px, 40vh) rotate(180deg)`, opacity: .8, offset: .5 },
-      { transform: `translate(${drift}px, 100vh) rotate(360deg)`, opacity: 0 }
-    ], { duration: duration * 1000, easing: 'ease-in-out' });
-
-    setTimeout(() => petal.remove(), duration * 1000);
-  }
-  setInterval(() => { if (opened) spawnPetal(); }, 3200);
-
-  /* ---------- Easter egg: click AR five times ---------- */
-  const easterTrigger = document.getElementById('easter-trigger');
-  const easterGallery = document.getElementById('easter-gallery');
-  const easterClose = document.getElementById('easter-close');
-  let clickCount = 0;
-  let clickTimer = null;
-
-  easterTrigger.addEventListener('click', () => {
-    clickCount++;
-    clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => { clickCount = 0; }, 1800);
-    if (clickCount >= 5) {
-      clickCount = 0;
-      easterGallery.classList.add('open');
-      fireConfetti();
-    }
-  });
-  easterClose.addEventListener('click', () => easterGallery.classList.remove('open'));
-
-  /* ---------- Filmstrip drag-scroll (desktop convenience) ---------- */
-  const filmstrip = document.getElementById('filmstrip');
-  let isDown = false, startX, scrollLeft;
-  filmstrip.addEventListener('mousedown', (e) => {
-    isDown = true;
-    startX = e.pageX - filmstrip.offsetLeft;
-    scrollLeft = filmstrip.scrollLeft;
-  });
-  window.addEventListener('mouseup', () => { isDown = false; });
-  filmstrip.addEventListener('mouseleave', () => { isDown = false; });
-  filmstrip.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - filmstrip.offsetLeft;
-    filmstrip.scrollLeft = scrollLeft - (x - startX) * 1.4;
-  });
-});
+    petal.innerHTML = `<svg width="16"
