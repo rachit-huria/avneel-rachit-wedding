@@ -74,8 +74,7 @@
   <div class="nav-mark">AR</div>
   <ul class="nav-links" id="nav-links">
     <li><a href="#story" data-nav>Our Story</a></li>
-    <li><a href="#booth" data-nav>Moments</a></li>
-    <li><a href="#weekend" data-nav>Weekend</a></li>
+    <li><a href="#weekend" data-nav>Celebrations</a></li>
     <li><a href="#venue" data-nav>Venue</a></li>
     <li><a href="#rsvp" data-nav>RSVP</a></li>
     <li><a href="#gallery" data-nav>Gallery</a></li>
@@ -155,90 +154,68 @@
   </div>
 </section>
 
-<!-- SECTION 4 — PHOTO BOOTH -->
-<section id="booth" class="section">
-  <div class="section-head">
-    <p class="eyebrow reveal-up">A Little Reel</p>
-    <h2 class="reveal-up">Photo Booth</h2>
-  </div>
-  <div class="filmstrip-wrap">
-    <div class="filmstrip" id="filmstrip">
-      <div class="frame" data-full="assets/images/festival.jpg"><img src="assets/images/festival.jpg" alt="Candid moment one" loading="lazy"></div>
-      <div class="frame" data-full="assets/images/jungle-night.jpg"><img src="assets/images/jungle-night.jpg" alt="Candid moment two" loading="lazy"></div>
-      <div class="frame" data-full="assets/images/resort-scenic.jpg"><img src="assets/images/resort-scenic.jpg" alt="Candid moment three" loading="lazy"></div>
-      <div class="frame" data-full="assets/images/indoor-selfie.jpg"><img src="assets/images/indoor-selfie.jpg" alt="Candid moment four" loading="lazy"></div>
-      <div class="frame" data-full="assets/images/mountain.jpg"><img src="assets/images/mountain.jpg" alt="Candid moment five" loading="lazy"></div>
-      <div class="frame" data-full="assets/images/jungle-day.jpg"><img src="assets/images/jungle-day.jpg" alt="Candid moment six" loading="lazy"></div>
-    </div>
-  </div>
-  <p class="swipe-hint">&larr; swipe through the reel &rarr;</p>
-</section>
-
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <button class="lightbox-close" id="lightbox-close" aria-label="Close"><i data-lucide="x"></i></button>
   <img src="" alt="" id="lightbox-img">
 </div>
 
-<!-- SECTION 5 — WEDDING WEEKEND -->
+<!-- SECTION 4 — THE CELEBRATIONS -->
 <section id="weekend" class="section">
   <div class="section-head">
-    <p class="eyebrow reveal-up">The Celebrations</p>
-    <h2 class="reveal-up">Wedding Weekend</h2>
+    <p class="eyebrow reveal-up">Two Days of Love</p>
+    <h2 class="reveal-up">The Celebrations</h2>
   </div>
-  <div class="event-cards">
-    <button class="event-card reveal-up" data-event="haldi">
-      <div class="event-card-top">
-        <i data-lucide="sun-medium"></i>
-        <h3>Haldi</h3>
+  <div class="weekend-days">
+    <article class="day-card">
+      <div class="day-card-head">
+        <span class="day-label">Day One</span>
+        <h3>Thursday, December 3</h3>
       </div>
-      <p class="event-date">3 December &bull; Morning</p>
-      <span class="event-more">View details</span>
-    </button>
-    <button class="event-card reveal-up" data-event="sangeet">
-      <div class="event-card-top">
-        <i data-lucide="music-4"></i>
-        <h3>Sangeet</h3>
-      </div>
-      <p class="event-date">3 December &bull; Evening</p>
-      <span class="event-more">View details</span>
-    </button>
-    <button class="event-card reveal-up" data-event="wedding">
-      <div class="event-card-top">
-        <i data-lucide="gem"></i>
-        <h3>Wedding</h3>
-      </div>
-      <p class="event-date">4 December &bull; Evening</p>
-      <span class="event-more">View details</span>
-    </button>
-  </div>
+      <ul class="day-schedule">
+        <li>
+          <span class="schedule-time">11:00 &ndash; 11:30 AM</span>
+          <span class="schedule-event">Wedding Lunch <em>Followed by the Sagan Ceremony</em></span>
+        </li>
+        <li>
+          <span class="schedule-time">4:30 &ndash; 5:00 PM</span>
+          <span class="schedule-event">High Tea</span>
+        </li>
+        <li>
+          <span class="schedule-time">7:30 &ndash; 8:00 PM</span>
+          <span class="schedule-event">Ring Ceremony <em>Followed by Sangeet</em></span>
+        </li>
+      </ul>
+    </article>
 
-  <div class="event-detail" id="event-detail">
-    <div class="event-detail-inner">
-      <button class="event-detail-close" id="event-detail-close" aria-label="Close details"><i data-lucide="x"></i></button>
-      <div data-detail="haldi">
-        <span class="timeline-mark">Haldi</span>
-        <h3>A Morning of Turmeric &amp; Laughter</h3>
-        <p>Join us for a bright, joyful Haldi ceremony full of colour, music and blessings, as we're anointed for the days ahead.</p>
-        <p class="event-when"><i data-lucide="clock"></i> 3 December, 10:00 AM onwards</p>
+    <article class="day-card">
+      <div class="day-card-head">
+        <span class="day-label">Day Two</span>
+        <h3>Friday, December 4</h3>
       </div>
-      <div data-detail="sangeet">
-        <span class="timeline-mark">Sangeet</span>
-        <h3>An Evening of Song &amp; Dance</h3>
-        <p>Dance floors, dholak beats and a few surprise performances &mdash; come dressed to twirl the night away with us.</p>
-        <p class="event-when"><i data-lucide="clock"></i> 3 December, 7:00 PM onwards</p>
-      </div>
-      <div data-detail="wedding">
-        <span class="timeline-mark">Wedding</span>
-        <h3>The Vows</h3>
-        <p>The main ceremony, where we say our vows surrounded by everyone who has shaped our story &mdash; followed by dinner and celebration.</p>
-        <p class="event-when"><i data-lucide="clock"></i> 4 December, 6:00 PM onwards</p>
-      </div>
-    </div>
+      <ul class="day-schedule">
+        <li>
+          <span class="schedule-time">8:00 &ndash; 8:30 AM</span>
+          <span class="schedule-event">Breakfast</span>
+        </li>
+        <li>
+          <span class="schedule-time">10:30 &ndash; 11:00 AM</span>
+          <span class="schedule-event">Carnival <em>Followed by Haldi and Ghadoli</em></span>
+        </li>
+        <li>
+          <span class="schedule-time">4:30 &ndash; 5:00 PM</span>
+          <span class="schedule-event">High Tea</span>
+        </li>
+        <li>
+          <span class="schedule-time">8:00 PM onwards</span>
+          <span class="schedule-event">Baarat Arrival <em>Followed by Reception Dinner and Midnight Pheras</em></span>
+        </li>
+      </ul>
+    </article>
   </div>
 </section>
 
-<!-- SECTION 6 — COUNTDOWN -->
+<!-- SECTION 5 — COUNTDOWN -->
 <section id="countdown" class="section">
   <div class="countdown-bg" aria-hidden="true"></div>
   <p class="eyebrow reveal-up">Until We Say &ldquo;I Do&rdquo;</p>
@@ -253,7 +230,7 @@
   </div>
 </section>
 
-<!-- SECTION 7 — VENUE -->
+<!-- SECTION 6 — VENUE -->
 <section id="venue" class="section">
   <div class="venue-card reveal-up">
     <div class="venue-info">
@@ -280,7 +257,7 @@
   </div>
 </section>
 
-<!-- SECTION 8 — RSVP -->
+<!-- SECTION 7 — RSVP -->
 <section id="rsvp" class="section">
   <div class="section-head">
     <p class="eyebrow reveal-up">Kindly Respond</p>
@@ -318,7 +295,7 @@
   </div>
 </section>
 
-<!-- SECTION 9 — GALLERY -->
+<!-- SECTION 8 — GALLERY -->
 <section id="gallery" class="section">
   <div class="section-head">
     <p class="eyebrow reveal-up">In Frame</p>
@@ -347,7 +324,7 @@
   </div>
 </div>
 
-<!-- SECTION 10 — THANK YOU -->
+<!-- SECTION 9 — THANK YOU -->
 <section id="thankyou" class="section">
   <div class="thankyou-media">
     <img src="assets/images/jungle-night.jpg" alt="Avneel and Rachit" loading="lazy">
