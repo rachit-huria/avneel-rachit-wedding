@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   document.addEventListener('mouseover', (e) => {
-    if (e.target.closest('a, button, .masonry-item, input, textarea')) {
+    if (e.target.closest('a, button, input, textarea')) {
       cursorRing.classList.add('hovering');
     }
   });
   document.addEventListener('mouseout', (e) => {
-    if (e.target.closest('a, button, .masonry-item, input, textarea')) {
+    if (e.target.closest('a, button,  input, textarea')) {
       cursorRing.classList.remove('hovering');
     }
   });
@@ -230,14 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // masonry
-    gsap.utils.toArray('.masonry-item').forEach((f, i) => {
-      gsap.fromTo(f, { opacity: 0, y: 40 }, {
-        opacity: 1, y: 0, duration: .8, ease: 'power2.out', delay: (i % 3) * 0.08,
-        scrollTrigger: { trigger: f, start: 'top 92%' }
-      });
-    });
-
+  
     // event cards stagger
     gsap.fromTo('.day-card', { opacity: 0, y: 40 }, {
       opacity: 1, y: 0, duration: .8, stagger: .15, ease: 'power2.out',
@@ -266,30 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lenis) lenis.scrollTo(target); else target.scrollIntoView({ behavior: 'smooth' });
   });
 
-  /* ---------- Lightbox (masonry gallery) ---------- */
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxClose = document.getElementById('lightbox-close');
 
-  function openLightbox(src, alt){
-    lightboxImg.src = src;
-    lightboxImg.alt = alt || '';
-    lightbox.classList.add('open');
-    lightbox.setAttribute('aria-hidden', 'false');
-  }
-  function closeLightbox(){
-    lightbox.classList.remove('open');
-    lightbox.setAttribute('aria-hidden', 'true');
-  }
-  document.querySelectorAll('.masonry-item').forEach(el => {
-    el.addEventListener('click', () => {
-      const img = el.querySelector('img');
-      openLightbox(el.dataset.full || img.src, img.alt);
-    });
-  });
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
   /* ---------- Countdown ---------- */
   const weddingDate = new Date('2026-12-03T11:00:00');
