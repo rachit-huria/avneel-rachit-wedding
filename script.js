@@ -388,9 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cctx.translate(p.x, p.y);
         cctx.rotate(p.rot * Math.PI / 180);
         cctx.fillStyle = p.color;
-        cctx.fillRect(-p.w / 2, -p.h / 2, w(p), h(p));
-        function w(p){ return p.w; }
-        function h(p){ return p.h; }
+        cctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         cctx.restore();
       });
       if (frame < 220) {
@@ -406,4 +404,36 @@ document.addEventListener('DOMContentLoaded', () => {
   function spawnPetal(){
     const petal = document.createElement('div');
     petal.className = 'petal';
-    petal.innerHTML = `<svg width="16"
+    petal.innerHTML = `<svg width="16" height="16" viewBox="0 0 16 16"><path d="M8 0C10 4 16 6 8 16C0 6 6 4 8 0Z" fill="${Math.random() > 0.5 ? '#C9A66B' : '#5A1E2D'}" opacity="0.55"/></svg>`;
+    petal.style.left = Math.random() * 100 + 'vw';
+    document.body.appendChild(petal);
+    const duration = Math.random() * 6 + 8;
+    const drift = Math.random() * 120 - 60;
+    petal.animate([
+      { transform: 'translate(0,0) rotate(0deg)', opacity: 0 },
+      { transform: `translate(${drift * 0.3}px, 40vh) rotate(180deg)`, opacity: .8, offset: .5 },
+      { transform: `translate(${drift}px, 100vh) rotate(360deg)`, opacity: 0 }
+    ], { duration: duration * 1000, easing: 'ease-in-out' });
+    setTimeout(() => petal.remove(), duration * 1000);
+  }
+  setInterval(() => { if (opened) spawnPetal(); }, 3200);
+
+  /* ---------- Easter egg: click AR five times ---------- */
+  const easterTrigger = document.getElementById('easter-trigger');
+  const easterGallery = document.getElementById('easter-gallery');
+  const easterClose = document.getElementById('easter-close');
+  let clickCount = 0;
+  let clickTimer = null;
+  easterTrigger.addEventListener('click', () => {
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 1800);
+    if (clickCount >= 5) {
+      clickCount = 0;
+      easterGallery.classList.add('open');
+      fireConfetti();
+    }
+  });
+  easterClose.addEventListener('click', () => easterGallery.classList.remove('open'));
+
+});
