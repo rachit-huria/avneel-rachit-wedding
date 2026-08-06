@@ -666,43 +666,6 @@ p{ margin:0; }
   .timeline-item[data-side="right"] .timeline-text{ grid-column:1; order:2; text-align:left; }
 }
 
-/* ============================================================
-   LIGHTBOX
-   ============================================================ */
-.lightbox{
-  position: fixed;
-  inset:0;
-  z-index: 2500;
-  background: rgba(20,8,12,0.94);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 2rem;
-  opacity:0;
-  visibility:hidden;
-  transition: opacity .4s var(--ease-lux), visibility .4s;
-}
-.lightbox.open{ opacity:1; visibility:visible; }
-.lightbox img{
-  max-width: min(90vw, 900px);
-  max-height: 86vh;
-  object-fit:contain;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  transform: scale(.92);
-  transition: transform .4s var(--ease-lux);
-}
-.lightbox.open img{ transform: scale(1); }
-.lightbox-close{
-  position:absolute;
-  top: 1.6rem; right: 1.6rem;
-  color: var(--gold-light);
-  width: 44px; height:44px;
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  border: 1px solid rgba(201,166,107,0.4);
-  transition: background .3s;
-}
-.lightbox-close:hover{ background: rgba(201,166,107,0.15); }
 
 /* ============================================================
    WEDDING WEEKEND — DAY SCHEDULE
@@ -1003,43 +966,7 @@ p{ margin:0; }
   .rsvp-form{ grid-template-columns: 1fr; }
 }
 
-/* ============================================================
-   MASONRY GALLERY
-   ============================================================ */
-.masonry{
-  max-width: var(--container);
-  margin: 0 auto;
-  column-count: 3;
-  column-gap: 1.2rem;
-}
-.masonry-item{
-  break-inside: avoid;
-  margin-bottom: 1.2rem;
-  overflow:hidden;
-  position:relative;
-  box-shadow: 0 16px 34px rgba(90,30,45,0.12);
-}
-.masonry-item img{
-  width:100%;
-  display:block;
-  transition: transform .6s var(--ease-soft), filter .6s;
-}
-.masonry-item:hover img{ transform: scale(1.08); }
-.masonry-item::after{
-  content:"";
-  position:absolute; inset:0;
-  background: linear-gradient(to top, rgba(90,30,45,0.35), transparent 50%);
-  opacity:0;
-  transition: opacity .4s;
-}
-.masonry-item:hover::after{ opacity:1; }
 
-@media (max-width: 760px){
-  .masonry{ column-count: 2; }
-}
-@media (max-width: 440px){
-  .masonry{ column-count: 1; }
-}
 
 /* ============================================================
    EASTER EGG GALLERY
