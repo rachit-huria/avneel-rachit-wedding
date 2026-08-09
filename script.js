@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('add-calendar-btn').addEventListener('click', () => {
     const start = '20261203T100000';
     const end = '20261204T230000';
-    const details = encodeURIComponent("Avneel & Rachit's Wedding Weekend");
+    const details = encodeURIComponent("Avneel & Rachit's Wedding");
     const location = encodeURIComponent('Glory by Shrida');
     const url = `https://www.google.com/calendar/render?action=TEMPLATE&text=${details}&dates=${start}/${end}&location=${location}&details=${encodeURIComponent('Join us as we begin forever.')}`;
     window.open(url, '_blank');
