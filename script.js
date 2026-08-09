@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Add to calendar ---------- */
   document.getElementById('add-calendar-btn').addEventListener('click', () => {
-    const start = '20261203T100000';
+    const start = '20261203T110000';
     const end = '20261204T230000';
     const details = encodeURIComponent("Avneel & Rachit's Wedding");
     const location = encodeURIComponent('Glory by Shrida');
